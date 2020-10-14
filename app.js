@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const flash = require('connect-flash');
+const config = require('config');
 
 const Flash = require('./utils/Flash');
 
@@ -20,8 +21,8 @@ const {
 const setLocals = require('./middleware/setLocals');
 
 const PORT = process.env.PORT || 3000;
-const dbUser = process.env.dbUser
-const dbUserPass = process.env.dbUserPass
+const dbUser = config.get('db-username');
+const dbUserPass = config.get('db-password');
 const dbName = 'blog';
 const mongoDBUrl = `mongodb+srv://${dbUser}:${dbUserPass}@cluster0.arzvi.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
@@ -32,6 +33,7 @@ const store = new mongoDBStore({
 });
 
 const app = express();
+console.log(config.get('name'));
 
 if(app.get('env').toLowerCase() === 'development'){
     app.use(morgan('dev'));
@@ -49,7 +51,7 @@ const middleware = [
     }),
     express.json(),
     session({
-        secret: process.env.SECRET_KEY || 'SECRET_KEY',
+        secret: config.get('secret'),
         resave: false,
         saveUninitialized: false,
         store: store,
