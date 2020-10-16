@@ -1,24 +1,13 @@
 require('dotenv').config();
 const express = require('express');
-const morgan = require('morgan');
 const mongoose = require('mongoose');
-const session = require('express-session');
-const flash = require('connect-flash');
 const config = require('config');
 
 const Flash = require('./utils/Flash');
 
-const mongoDBStore = require('connect-mongodb-session')(session);
+const setMiddleware = require('./middleware/middleware');
+const setRoutes = require('./routes/routes');
 
-//import routes
-const authRoutes = require('./routes/authRout');
-const dashboardRoutes = require('./routes/dashboardRout');
-
-//import middleware
-const {
-    bindUserWithRequest
-} = require('./middleware/authMiddleware');
-const setLocals = require('./middleware/setLocals');
 
 const PORT = process.env.PORT || 3000;
 const dbUser = config.get('db-username');
@@ -26,54 +15,32 @@ const dbUserPass = config.get('db-password');
 const dbName = 'blog';
 const mongoDBUrl = `mongodb+srv://${dbUser}:${dbUserPass}@cluster0.arzvi.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
-const store = new mongoDBStore({
-    uri: mongoDBUrl,
-    collection: 'sessions',
-    expires: 1000 * 60 * 60 * 2
-});
 
 const app = express();
 console.log(config.get('name'));
-
-if(app.get('env').toLowerCase() === 'development'){
-    app.use(morgan('dev'));
-}
 
 //setup view Engine
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-//Middleware array
-const middleware = [
-    express.static('public'),
-    express.urlencoded({
-        extended: true
-    }),
-    express.json(),
-    session({
-        secret: config.get('secret'),
-        resave: false,
-        saveUninitialized: false,
-        store: store,
-    }),
-    bindUserWithRequest(),
-    setLocals(),
-    flash()
-];
+//using middleware from middleware directory
+setMiddleware(app);
 
-app.use(middleware);
+//using routes from route directory
+setRoutes(app);
 
-app.use('/auth', authRoutes);
-app.use('/dashboard', dashboardRoutes);
+app.use((req, res, next) => {
+    let error = new Error('404 Page Not Found');
+    error.status = 404;
+    next(error);
+});
 
-app.get('/', (req, res) => {
+app.use((error, req, res, next) => {
+    if(error.status === 404){
+        return res.render('pages/error/404', { flashMessage: {} });
+    }
 
-    res.render('pages/auth/signup', {
-        title: 'Create A New Account',
-        flashMessage: Flash.getMessage(req),
-        error: {},
-        value: {}
-    });
+    res.render('pages/error/500', { flashMessage: {} });
 });
 
 
