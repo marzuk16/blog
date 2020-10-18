@@ -7,20 +7,32 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2"></div>
+        <div class="col-md-2">
+            <%- include('../../partials/sidebar.ejs') %> 
+        </div>
         <div class="col-md-10">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <div class="card card-body my-5">
                         <h4><%= title %> </h4>
                         <div class="profile-pics">
-                            <img src=" <%= user.profilePics %> " alt="profile pics" class="img-thumbnail img-fluid " id="profilePics">
+                            <img
+                                src=" <%= user.profilePics %> "
+                                alt="profile pics"
+                                class="img-thumbnail img-fluid "
+                                id="profilePics"
+                            >
                             <form 
                                 action="/uploads/profilePics"
                                 class="my-2"
                                 id="profilePicsForm"
                             >
-                                <input type="file" name="profilePics" id="profilePicsFile" accept="image/*">
+                                <input
+                                    type="file"
+                                    name="profilePics"
+                                    id="profilePicsFile"
+                                    accept="image/*"
+                                >
                                 <input
                                     type="button"
                                     value="Remove Pics"
@@ -35,11 +47,14 @@
                                 <div class="form-group">
                                     <input
                                         type="text"
-                                        class="form-control"
+                                        class="form-control <%= error.name ? 'is-invalid' : '' %> "
                                         name="name"
                                         placeholder="Enter Your Name"
                                         id="name"
                                     >
+                                    <div class="invalid-feedback">
+                                        <%= error.name %> 
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <input
@@ -55,20 +70,25 @@
                                 <div class="form-group">
                                     <input
                                         type="text"
-                                        class="form-control"
+                                        class="form-control <%= error.title ? 'is-invalid' : '' %> "
                                         name="title"
                                         placeholder="Enter A Short Title"
                                         id="title"
                                     >
+                                    <div class="invalid-feedback">
+                                        <%= error.title %> 
+                                    </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="bio">Enter Your Bio</label>
                                     <textarea
                                         name="bio"
                                         id="bio"
-                                        class="form-control"
-                                    >
-                                    Your Bio
-                                    </textarea>
+                                        class="form-control <%= error.bio ? 'is-invalid' : '' %> "
+                                    ></textarea>
+                                    <div class="invalid-feedback">
+                                        <%= error.bio %> 
+                                    </div>
                                 </div>
                                 <div>
                                     <p class="lead">Your Social Links</p>
@@ -80,10 +100,13 @@
                                         </div>
                                         <input
                                             type="text"
-                                            class="form-control"
+                                            class="form-control <%= error.website ? 'is-invalid' : '' %> "
                                             placeholder="Website Links"
                                             name="website"
                                         >
+                                        <div class="invalid-feedback">
+                                            <%= error.website %> 
+                                        </div>
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
@@ -93,10 +116,13 @@
                                         </div>
                                         <input
                                             type="text"
-                                            class="form-control"
+                                            class="form-control <%= error.facebook ? 'is-invalid' : '' %> "
                                             placeholder="Facebook Link"
                                             name="facebook"
                                         >
+                                        <div class="invalid-feedback">
+                                            <%= error.facebook %> 
+                                        </div>
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
@@ -106,10 +132,13 @@
                                         </div>
                                         <input
                                             type="text"
-                                            class="form-control"
+                                            class="form-control <%= error.github ? 'is-invalid' : '' %> "
                                             placeholder="Github Link"
                                             name="github"
                                         >
+                                        <div class="invalid-feedback">
+                                            <%= error.github %> 
+                                        </div>
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
@@ -119,17 +148,19 @@
                                         </div>
                                         <input
                                             type="text"
-                                            class="form-control"
+                                            class="form-control <%= error.linkedin ? 'is-invalid' : '' %> "
                                             placeholder="Linkedin Link"
                                             name="linkedin"
                                         >
+                                        <div class="invalid-feedback">
+                                            <%= error.linkedin %> 
+                                        </div>
                                     </div>
                                 </div>
                                 <input
-                                    type="button"
+                                    type="submit"
                                     value="Create Profile"
                                     class="btn btn-primary btn-sm my-2"
-                                    id="craeteProfile"
                                 >
                             </form>
                         </div>
