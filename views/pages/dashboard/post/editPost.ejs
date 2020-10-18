@@ -48,13 +48,11 @@
                             value="<%= post.tags.length > 0 ? post.tags.join(', ') : '' %>"
                         >
                     </div>
-                    <%= if(post.thumbnail){ %>
+                    <% if (post.thumbnail) { %>
                         <img
                             src="<%= post.thumbnail %>"
-                            id="thumbnail"
-                            alt="Post Thumbnail"
-                            class="img-fluid mb-4"
-                        >
+                            alt="<%= post.title %>"
+                            class="card-img-top mt-3">
                     <% } %>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">

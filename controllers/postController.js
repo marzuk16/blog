@@ -59,6 +59,7 @@ exports.createPostPostController = async (req, res, next) => {
 
     if (req.file) {
         post.thumbnail = `/uploads/${req.file.filename}`;
+        //post.thumbnail = '/uploads/'+req.file.filename;
     }
 
     try {
