@@ -53,6 +53,5 @@ window.onload = function(){
         });
 
         return fetch(req);
-
     }
 }
