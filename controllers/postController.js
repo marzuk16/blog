@@ -147,7 +147,7 @@ exports.editPostPostController = async (req, res, next) => {
         }
         let thumbnail = post.thumbnail;
         if (req.file) {
-            thumbnail = req.file.filename;
+            thumbnail = `/uploads/${req.file.filename}`;
         }
 
         await Post.findOneAndUpdate({

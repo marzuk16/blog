@@ -3,6 +3,11 @@ const dashboardRoute = require('./dashboardRout');
 const Flash = require('../utils/Flash');
 const uploadRoute = require('./uploadRoutes');
 const postRoute = require('./postRoute');
+const explorerRoute = require('./exploreRoute');
+const searchRoute = require('./searchRoute');
+const authorRoute = require('./authorRoute');
+
+const apiRoutes = require('../api/routes/apiRoutes');
 
 const routes = [{
         path: '/auth',
@@ -17,6 +22,22 @@ const routes = [{
         handler: postRoute
     },
     {
+        path: '/explorer',
+        handler: explorerRoute
+    },
+    {
+        path: '/search',
+        handler: searchRoute
+    },
+    {
+        path: '/author',
+        handler: authorRoute
+    },
+    {
+        path: '/api',
+        handler: apiRoutes
+    },
+    {
         path: '/uploads',
         handler: uploadRoute
     },
@@ -24,12 +45,7 @@ const routes = [{
         path: '/',
         handler: (req, res) => {
 
-            res.render('pages/auth/signup', {
-                title: 'Create A New Account',
-                flashMessage: Flash.getMessage(req),
-                error: {},
-                value: {}
-            })
+            res.redirect('/explorer');
         }
     }
 ];

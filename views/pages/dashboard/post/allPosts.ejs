@@ -1,9 +1,6 @@
 <%- include('../../../partials/head.ejs') %>
 
-<link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
-/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css" />
 
 <div class="container-fluid">
     <div class="row">
@@ -11,19 +8,21 @@
             <%- include('../../../partials/sidebar.ejs') %>
         </div>
         <div class="col-md-10 my-5">
-            <div class="card card-body">
-                <h5>Lists Of My Posts</h5>
-                <div class="row">
-                    <% if (posts.length === 0) { %>
-                     <div class="text-centerd text-muted">
-                         <p>There Are No Posts Right Now</p>
-                         <a href="/posts/create" class="btn btn-primary btn-sm ">Create Post</a>
-                     </div>
-                    <% } else { %>
-                        <% for( let post of posts.reverse() ) { %>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card card-body">
+                        <h5>Lists Of My Posts</h5>
+                        <div class="row">
+                            <% if (posts.length === 0) { %>
+                            <div class="text-centerd text-muted  my-3 mx-3">
+                                <p>There Are No Posts Right Now</p>
+                                <a href="/posts/create" class="btn btn-primary btn-sm ">Create Post</a>
+                            </div>
+                            <% } else { %>
+                            <% for( let post of posts.reverse() ) { %>
                             <div class="card col-sm-3 m-3">
                                 <% if (post.thumbnail) { %>
-                                    <img src="<%= post.thumbnail %>" alt="<%= post.title %>" class="card-img-top mt-3">
+                                <img src="<%= post.thumbnail %>" alt="<%= post.title %>" class="card-img-top mt-3">
                                 <% } %>
                                 <div class="card-body">
                                     <a href="/posts/edit/<%= post._id %>" style="color: #222;">
@@ -31,8 +30,10 @@
                                     </a>
                                 </div>
                             </div>
-                        <% } %>
-                    <% } %> 
+                            <% } %>
+                            <% } %>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

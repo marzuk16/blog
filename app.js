@@ -37,9 +37,10 @@ app.use((req, res, next) => {
 
 app.use((error, req, res, next) => {
     if(error.status === 404){
+        console.log(error);
         return res.render('pages/error/404', { flashMessage: {} });
     }
-
+    console.log(error);
     res.render('pages/error/500', { flashMessage: {} });
 });
 
