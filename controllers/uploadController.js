@@ -13,7 +13,7 @@ exports.uploadProfilePics = async (req, res, next) => {
             let profilePics = `/uploads/${req.file.filename}`;
 
             if (profile) {
-                await profile.findOneAndUpdate({
+                await Profile.findOneAndUpdate({
                     user: req.user._id
                 }, {
                     $set: {
@@ -87,7 +87,7 @@ exports.removeProfilePics = (req, res, next) => {
     } catch (e) {
         console.log(e);
         res.status(500).json({
-            message: 'Cant not remove profile pic'
+            message: 'Can not remove profile pic'
         });
     }
 };
