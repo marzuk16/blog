@@ -49,7 +49,8 @@ exports.explorerGetController = async (req, res, next) => {
 
     let filter = req.query.filter || 'latest';
     let currentPage = parseInt(req.query.page) || 1;
-    let itemPerPage = 10;
+    //console.log(`current page: ${currentPage}`);
+    let itemPerPage = 5;
 
     let {
         order,
@@ -64,6 +65,7 @@ exports.explorerGetController = async (req, res, next) => {
             .limit(itemPerPage)
 
         let totalPost = await Post.countDocuments();
+        //console.log(`total post: ${totalPost}`);
         let totalPage = totalPost / itemPerPage;
 
         let bookmarks = [];

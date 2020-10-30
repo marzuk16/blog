@@ -49,6 +49,9 @@
                                     class="form-control"
                                     value="<%= post.tags.length > 0 ? post.tags.join(', ') : '' %>"
                                 >
+                                <div class="invalid-feedback">
+                                    <%= error.tags %> 
+                                </div>
                             </div>
                             <% if (post.thumbnail) { %>
                                 <img

@@ -17,5 +17,7 @@ module.exports = [
             }
 
             return true;
-        })
+        }),
+    body('tags')
+        .not().isEmpty().withMessage('Please provide a post tags.')
 ];
