@@ -38,7 +38,6 @@ function generateFilterObject(filter){
             break;
         }
     }
-
     return {
         filterObj,
         order
@@ -63,10 +62,11 @@ exports.explorerGetController = async (req, res, next) => {
             .sort(order === 1 ? '-createdAt' : 'createdAt')
             .skip( (itemPerPage * currentPage) - itemPerPage )
             .limit(itemPerPage)
-
+        //console.log(`posts: ${posts.length}`);
         let totalPost = await Post.countDocuments();
         //console.log(`total post: ${totalPost}`);
-        let totalPage = totalPost / itemPerPage;
+        let totalPage = Math.ceil(totalPost / itemPerPage);
+        //console.log(`total page: ${totalPage}`);
 
         let bookmarks = [];
 

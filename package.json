@@ -4,7 +4,7 @@
   "description": "Simple blog",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon app.js",
     "dev": "nodemon app.js"
   },
   "author": "botMan",
@@ -25,7 +25,8 @@
     "mongoose": "^5.10.7",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
-    "reading-time": "^1.2.0"
+    "reading-time": "^1.2.0",
+    "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const config = require('config');
+const favicon = require('serve-favicon');
 
 const Flash = require('./utils/Flash');
 
